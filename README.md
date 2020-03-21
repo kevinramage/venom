@@ -425,8 +425,11 @@ A TestCase Context has to implement this interface
 type TestCaseContext interface {
 	Init() error
 	Close() error
+	GetTestCase() TestCase
 	SetTestCase(tc TestCase)
-	GetName() string
+	GetTestSuite() TestSuite
+	SetTestSuite(ts TestSuite)
+  GetName() string
 }
 ```
 
