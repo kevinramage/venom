@@ -216,6 +216,45 @@ testcases:
       ConfirmPopup: true
 ```
 
+
+Run script allow to execute javascript on browser
+Example:
+
+```yaml
+name: TestRunScript
+testcases:
+- name: TestRunScript
+  context:
+    type: web
+    driver: phantomjs
+    debug: true
+  steps:
+
+  # Navigate
+  - action:
+      navigate: 
+        url: https://www.google.fr/
+
+  # Simple action
+  - action:
+      runScript:
+        script: "document.getElementsByName('q')[0].value = 'coucou'"
+    screenshot: '01-Basic.png'
+
+  # Manage arguments
+  - action:
+      runScript:
+        script: "document.getElementsByName('q')[0].value = ''.concat(arg1, arg2, arg3)"
+        args:
+          arg1: 1
+          arg2: "test"
+          arg3:
+          - element1
+          - element2
+          - element3
+    screenshot: '02-Args.png'
+```
+
 ## Output
 
 * result.url

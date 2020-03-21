@@ -178,6 +178,15 @@ func (Executor) Run(testCaseContext venom.TestCaseContext, l venom.Logger, step 
 		if err := ctx.Page.NextWindow(); err != nil {
 			return nil, err
 		}
+	} else if e.Action.RunScript != nil {
+		var args map[string]interface{} = make(map[string]interface{})
+		for k, v := range e.Action.RunScript.Args {
+			args[k] = fmt.Sprintf("%v", v)
+		}
+		var result interface{}
+		if err := ctx.Page.RunScript(e.Action.RunScript.Script, args, &result); err != nil {
+			return nil, err
+		}
 	}
 
 	// take a screenshot
