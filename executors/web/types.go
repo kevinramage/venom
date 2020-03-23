@@ -2,7 +2,18 @@ package web
 
 // Action represents what can be done with web executor
 type Action struct {
-	NextWindow bool	   `yaml:"nextWindow,omitempty"`
+	Click           *Click       `yaml:"click,omitempty"`
+	Fill            []Fill       `yaml:"fill,omitempty"`
+	Find            string       `yaml:"find,omitempty"`
+	Navigate        *Navigate    `yaml:"navigate,omitempty"`
+	Wait            int64        `yaml:"wait,omitempty"`
+	ConfirmPopup    bool         `yaml:"confirmPopup,omitempty"`
+	CancelPopup     bool         `yaml:"cancelPopup,omitempty"`
+	Select          *Select      `yaml:"select,omitempty"`
+	UploadFile      *UploadFile  `yaml:"uploadFile,omitempty"`
+	SelectFrame     *SelectFrame `yaml:"selectFrame,omitempty"`
+	SelectRootFrame bool         `yaml:"selectRootFrame,omitempty"`
+	NextWindow      bool         `yaml:"nextWindow,omitempty"`
 	HistoryAction   string       `yaml:"historyAction,omitempy"`
 	RunScript       *RunScript   `yaml:"runScript,omitempty"`
 }
