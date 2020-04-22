@@ -203,8 +203,8 @@ func (e Executor) getRequest(testCaseContext venom.TestCaseContext, workdir stri
 				return nil, err
 			}
 			tempString := string(temp)
-			for key, value := range testCaseContext.GetTestSuite().Vars {
-				tempString = strings.Replace((tempString), "{{."+key+"}}", value.(string), -1)
+			for key, value := range testCaseContext.GetTestSuite().Templater.Values {
+				tempString = strings.Replace(tempString, "{{." + key + "}}", value, -1)
 			}
 			body = bytes.NewBufferString(tempString)
 		}

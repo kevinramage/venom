@@ -55,7 +55,14 @@ func (v *Venom) runTestSuite(ts *TestSuite) {
 	for index := 0; index < 10; index++ {
 		var toApply bool
 		for k, v := range ts.Templater.Values {
-			if strings.Contains(v, "{{") {
+			if strings.Contains(v, "()") {
+				toApply = true
+				for keyFunction, functionObj := range ts.Templater.Functions {
+					functionName := keyFunction + "()"
+					ts.Templater.Values[k] = strings.Replace(ts.Templater.Values[k], functionName, functionObj(), -1)
+				}
+			}
+			if strings.Contains(v, "{{")  {
 				toApply = true
 				_, s := ts.Templater.apply([]byte(v))
 				ts.Templater.Values[k] = string(s)
